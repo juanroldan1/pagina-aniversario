@@ -407,7 +407,7 @@ function App() {
                 <h3>El Primer Encuentro</h3>
                 <p className="texto-historia">
                   El día que nos conocimos, Dios míoooooo que día, resulta y pasa que yo iba a cine, de no haber ido a cine esta historia tan hermosa
-                  no sería realidad, eso fue un () de junio tu ibas a ver barbie y yo oppenheimer, pero al final no habían boletas para ninguna de las dos
+                  no sería realidad, eso fue un 26 de julio tu ibas a ver barbie y yo oppenheimer, pero al final no habían boletas para ninguna de las dos
                   así que fuimos a creps a hacerles compañía y ahí estabas tú con tu busito que decía que era de abuelita pero realmente te veías hermosísisimaaa
                   era un busito rosado me acuerdo muy bien en fin jejejeje, tú estabas comiendo un postre de frutos rojos
                   y yo me senté al lado primero me dijiste que estaba muy desechable y luego me compartiste de tu postre,
@@ -422,7 +422,9 @@ function App() {
                 <button className="favorito">💖</button>
                 <h3>Los Primeros Días</h3>
                 <p className="texto-historia">
-                  Ay Dios mío como no olvidar los primeros días wow, ya hace más de dos años empezamos a hablar y ahora míranos aquí juntos 
+                  Ay Dios mío como no olvidar los primeros días wow, ya hace más de dos años empezamos a hablar y ahora míranos aquí juntos, me acuerdo que yo te iba a acompañar
+                  a musica y que fue chistoso porque mu abuela decia que a donde iba y yo le decia que a acompañar a una amiga jajajajaaj y ahora miranos
+                  tambien como olvidar los descansos tu y yo hablando, riendonos y de todo, Dio mio que tiempos aquellos.
                 </p>
               </div>
               
@@ -430,7 +432,10 @@ function App() {
                 <button className="favorito">💖</button>
                 <h3>Cuando Supimos que Era Especial</h3>
                 <p className="texto-historia">
-                  Ese momento en que ambos se dieron cuenta de que había algo único y especial entre ustedes...
+                Siento que el dia que supimos que era especial o bueno yo supe que era especial fue el dia del terremoto, yo decia
+                yo no me voy a preocupar por nadie y literal ese dia yo todo preocupado que si estabas bien que como estaba Ana, ay Dios
+                y llegar a la casa buscar internet porque no tenia internet y escribirte si estabas bien, realmente en ese dia 
+                supe que ya era otro nivel.
                 </p>
               </div>
               
@@ -438,7 +443,10 @@ function App() {
                 <button className="favorito">💖</button>
                 <h3>Creciendo Juntos</h3>
                 <p className="texto-historia">
-                  Cómo han crecido como pareja, los retos superados, los momentos de felicidad compartidos...
+                  Siento que hemos tenido demasiados momentos sabes, momentos lindos, momentos no tan lindos pero siempre persiste
+                  el amor, siento que nuestro momento mas lindo han sido los paseos y la manera en que conectamos y nos
+                  quedamos riendo solo con vernos esos siento que son nuestros momentos mas lindos en nuestra relacion, no hay
+                  un momento exacto pero si me preguntan esos pequeños momentos hacen la diferencia.
                 </p>
               </div>
               
@@ -446,7 +454,10 @@ function App() {
                 <button className="favorito">💖</button>
                 <h3>El Presente</h3>
                 <p className="texto-historia">
-                  Dónde están ahora, qué significa esta relación para ambos, cómo se sienten después de dos años...
+                  Uffffff amor ahora siento que somos una relacion mucho, pero mucho mas madura de lo que eramos
+                  hace dos años flaca, hemos crecido tanto mi vida osea de una manera que siento que nos vemos hace dos años
+                  y digo Dios mio cuanto tiempo, obviamente el amor ha crecido, nuestras responsabilidades y todo, pero siento que hemos aprendido de nosotros
+                  y de nuestras experiencias para ser la pareja que somos hoy.
                 </p>
               </div>
             </div>
@@ -466,20 +477,21 @@ function App() {
                     pero wow ver esos ojitos tuyos brillar por esa cita en serio me llenó tanto y fue simplemente la primera de muchas citas inolvidables en nuestra relación.
                 </p>
               </div>
-              <div className="tarjeta-momento">
-                <button className="favorito">💖</button>
-                <h3>Primer "Te Amo"</h3>
-                <p>Descripción del momento...</p>
-              </div>
+
               <div className="tarjeta-momento">
                 <button className="favorito">💖</button>
                 <h3>Primer Viaje Juntos</h3>
-                <p>Descripción del momento...</p>
+                <p>Nuestro prier viaje juntos fue a aguachica, Dios mio amor yo estaba asustado, pero asustado no es palabra, por tu papa por todo
+                  literal pero ufffffff ese viaje fue, dejame decirte que ese viaje nos dio tanta vida amor y definitivamente quiero viajar mucho mas contigo.
+                </p>
               </div>
               <div className="tarjeta-momento">
                 <button className="favorito">💖</button>
                 <h3>Primer Aniversario</h3>
-                <p>Descripción del momento...</p>
+                <p>Nuestro primer añito que fue hace {diasJuntos} dias pero wow que aventuras amorcito que experiencias
+                  y fue ese dia un aniversario si pues a lo que eramos nosotros, no nos vimos bien bien pero 
+                  en el fin de semana lo celebramos, fuimos a cine y comimos a nuestra manera, nuestro primer añito.
+                </p>
               </div>
             </div>
           </div>
