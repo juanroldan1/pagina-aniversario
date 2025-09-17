@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Amore/static/css/main.3f8ae1cc.css",
+    "main.js": "/Amore/static/js/main.53f76e0a.js",
+    "static/js/453.b4c7044d.chunk.js": "/Amore/static/js/453.b4c7044d.chunk.js",
+    "index.html": "/Amore/index.html",
+    "main.3f8ae1cc.css.map": "/Amore/static/css/main.3f8ae1cc.css.map",
+    "main.53f76e0a.js.map": "/Amore/static/js/main.53f76e0a.js.map",
+    "453.b4c7044d.chunk.js.map": "/Amore/static/js/453.b4c7044d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3f8ae1cc.css",
+    "static/js/main.53f76e0a.js"
+  ]
+}
