@@ -2,7 +2,7 @@
   "name": "pagina-aniversario",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Ju4nd-r01d4n.github.io/Amore",
+  "homepage": "https://Ju4nd-r01d4n.github.io/pagina-aniversario",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.8.0",
