@@ -4,7 +4,7 @@
       "id": 1,
       "title": "M.A.I",
       "artist": "Milo J",
-      "src": "music/MILO J - M.A.I (Video Oficial).mp3",
+      "src": "/music/MILO J - M.A.I (Video Oficial).mp3",
       "duration": "3:00",
       "album": "mosep",
       "year": "2023",
@@ -19,7 +19,7 @@
       "artist":"Bad Bunny",
       "duration":"6:07",
       "descripcion": "Nuestros bailes INOLVIDABLES",
-      "src":"music/BAD BUNNY - BAILE INoLVIDABLE (Visualizer)  DeBÍ TiRAR MáS FOToS.mp3",
+      "src":"/music/BAD BUNNY - BAILE INoLVIDABLE (Visualizer)  DeBÍ TiRAR MáS FOToS.mp3",
       "image":"/images/baile inolvidable.png"
     },
     
@@ -29,7 +29,7 @@
     "year":"",
     "artist":"El arkeologo",
     "duration":"0:00",
-    "src": "music/El Arkeólogo - RED VELVET (Lianna & Gambeta) - (Letra) (1).mp3"
+    "src": "/music/El Arkeólogo - RED VELVET (Lianna & Gambeta) - (Letra) (1).mp3"
     }
   ],
   "metadata": {
