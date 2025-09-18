@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/juanroldan1/pagina-aniversario/static/css/main.3f8ae1cc.css",
+    "main.js": "/juanroldan1/pagina-aniversario/static/js/main.12b0ac2d.js",
+    "static/js/453.b4c7044d.chunk.js": "/juanroldan1/pagina-aniversario/static/js/453.b4c7044d.chunk.js",
+    "index.html": "/juanroldan1/pagina-aniversario/index.html",
+    "main.3f8ae1cc.css.map": "/juanroldan1/pagina-aniversario/static/css/main.3f8ae1cc.css.map",
+    "main.12b0ac2d.js.map": "/juanroldan1/pagina-aniversario/static/js/main.12b0ac2d.js.map",
+    "453.b4c7044d.chunk.js.map": "/juanroldan1/pagina-aniversario/static/js/453.b4c7044d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3f8ae1cc.css",
+    "static/js/main.12b0ac2d.js"
+  ]
+}
