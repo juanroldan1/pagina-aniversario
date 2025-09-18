@@ -18,7 +18,7 @@ const MusicPlayer = () => {
     const cargarPlaylist = async () => {
       try {
         setLoading(true);
-        const response = await fetch('public/playList.json');
+        const response = await fetch('/playlist.json');
         
         if (!response.ok) {
           throw new Error('Error al cargar la playlist');
