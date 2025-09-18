@@ -23,7 +23,7 @@ const MusicPlayer = () => {
         if (!response.ok) {
           throw new Error('Error al cargar la playlist');
         }
-        
+      
         const data = await response.json();
         setPlaylist(data.canciones);
         setError(null);
