@@ -18,7 +18,7 @@ const MusicPlayer = () => {
     const cargarPlaylist = async () => {
       try {
         setLoading(true);
-        const response = await fetch(process.env.PUBLIC_URL + '/playlist.json');
+        const response = await fetch('public/playList.json');
         
         if (!response.ok) {
           throw new Error('Error al cargar la playlist');
@@ -593,58 +593,12 @@ function App() {
             <MusicPlayer />
           </div>
         </section>
-        
-        {/* Timeline */}
-        <section id="timeline" className="seccion-linea-tiempo">
-          <div className="contenedor">
-            <h2 className="titulo-seccion">Línea de Tiempo</h2>
-            <div className="linea-tiempo">
-              <div className="elemento-linea-tiempo">
-                <div className="fecha-linea-tiempo">Septiembre 2023</div>
-                <div className="contenido-linea-tiempo">
-                  <h3>Nuestro Comienzo</h3>
-                  <p>El día que todo empezó...</p>
-                </div>
-              </div>
-              {/* Más eventos aquí */}
-            </div>
-          </div>
-        </section>
-
-        {/* Cartas */}
-        <section id="cartas" className="seccion-cartas">
-          <div className="contenedor">
-            <h2 className="titulo-seccion">Cartas de Amor</h2>
-            <div className="contenedor-cartas">
-              <div className="carta">
-                <h3>Para Ti, Mi Amor</h3>
-                <p className="contenido-carta">
-                  Aquí puedes escribir una carta especial para tu pareja...
-                </p>
-                <p className="firma-carta">Con todo mi amor, [Tu nombre]</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Planes */}
-        <section id="planes" className="seccion-futuro">
-          <div className="contenedor">
-            <h2 className="titulo-seccion">Nuestros Planes Futuros</h2>
-            <div className="contenido-planes">
-              <div className="elemento-plan">
-                <h3>Sueños Compartidos</h3>
-                <p>Los sueños y metas que quieren alcanzar juntos...</p>
-              </div>
-              <div className="elemento-plan">
-                <h3>Próximas Aventuras</h3>
-                <p>Viajes, experiencias y aventuras que planean vivir...</p>
-                <p>Actividades y metas que queremos lograr en el próximo año...</p>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
+        
+    
+
+  
+        
 
       {/* Footer */}
       <footer>
