@@ -709,16 +709,22 @@ function App() {
                   }}
                   />
               </div>
-              
-              <div className="elemento-foto">
+              {/*Carmen */}
+                            <div className="elemento-foto">
                 <img 
                   src={process.env.PUBLIC_URL + "/images/carmen.jpg"} 
-                  alt="Carmen" 
                   className="foto-galeria" 
+                  alt="Cumpleaños" 
                 />
-                <button className="favorito"><span>💖</span>
-                    <span>Agregar a favorito</span>
-                  </button>
+                <BotonFavorito 
+                  item={{
+                    id: 'foto-cumple',
+                    tipo: 'foto',
+                    titulo: 'Tu Cumpleaños',
+                    descripcion: 'Celebrando a la persona más especial',
+                    src: '/images/carmen.jpg'
+                  }}
+                  />
               </div>
               
               <div className="elemento-foto">
