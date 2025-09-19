@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 // Componente MusicPlayer
-const MusicPlayer = () => {
+const MusicPlayer = ({ favoritos, toggleFavorito, esFavorito }) => {
   const [playlist, setPlaylist] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,12 +13,36 @@ const MusicPlayer = () => {
   const [volume, setVolume] = useState(1);
   const audioRef = useRef(null);
 
+  // Componente BotonFavorito para música
+  const BotonFavoritoMusica = ({ cancion }) => {
+    const isFav = esFavorito(`cancion-${cancion.id}`);
+    
+    return (
+      <button
+        onClick={() => toggleFavorito({
+          id: `cancion-${cancion.id}`,
+          tipo: 'cancion',
+          titulo: cancion.title,
+          artista: cancion.artist,
+          descripcion: cancion.descripcion || 'Una de nuestras canciones especiales',
+          src: cancion.src,
+          image: cancion.image
+        })}
+        className={`favorito ${isFav ? 'activo' : ''}`}
+        title={isFav ? 'Quitar de favoritos' : 'Agregar a favoritos'}
+        style={{ fontSize: '12px', padding: '4px 8px' }}
+      >
+        <span>{isFav ? '❤️' : '🤍'}</span>
+      </button>
+    );
+  };
+
   // Cargar playlist desde JSON
   useEffect(() => {
     const cargarPlaylist = async () => {
       try {
         setLoading(true);
-        const response = await fetch(process.env.PUBLIC_URL + '/playList.json');
+        const response = await fetch(process.env.PUBLIC_URL + '/playlist.json');
         
         if (!response.ok) {
           throw new Error('Error al cargar la playlist');
@@ -175,31 +199,34 @@ const MusicPlayer = () => {
           />
           
           {/* Canción actual */}
-        <div className="cancion-actual">
-        <div className="imagen-disco">
-    {cancionActual.image ? (
-      <img 
-        src={process.env.PUBLIC_URL + cancionActual.image} 
-        alt={`Portada de ${cancionActual.title}`}
-        className="imagen-album"
-        onError={(e) => {
-          e.target.style.display = 'none';
-          e.target.nextSibling.style.display = 'flex';
-        }}
-      />
-    ) : null}
-    <div className="disco-vinilo" style={{ display: cancionActual.image ? 'none' : 'flex' }}>
-      🎵
-    </div>
-  </div>
-  <div className="info-cancion">
-    <h3>{cancionActual.title}</h3>
-    <p>{cancionActual.artist}</p>
-    {cancionActual.descripcion && (
-      <p className="descripcion-cancion">{cancionActual.descripcion}</p>
-    )}
-  </div>
-</div>
+          <div className="cancion-actual">
+            <div className="imagen-disco">
+              {cancionActual.image ? (
+                <img 
+                  src={process.env.PUBLIC_URL + cancionActual.image} 
+                  alt={`Portada de ${cancionActual.title}`}
+                  className="imagen-album"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'flex';
+                  }}
+                />
+              ) : null}
+              <div className="disco-vinilo" style={{ display: cancionActual.image ? 'none' : 'flex' }}>
+                🎵
+              </div>
+            </div>
+            <div className="info-cancion">
+              <h3>{cancionActual.title}</h3>
+              <p>{cancionActual.artist}</p>
+              {cancionActual.descripcion && (
+                <p className="descripcion-cancion">{cancionActual.descripcion}</p>
+              )}
+            </div>
+            <div style={{ marginLeft: 'auto' }}>
+              <BotonFavoritoMusica cancion={cancionActual} />
+            </div>
+          </div>
 
           {/* Controles */}
           <div className="controles-principales">
@@ -255,6 +282,7 @@ const MusicPlayer = () => {
                   {song.album && <p className="album-item">{song.album}</p>}
                 </div>
                 <span className="duracion-item">{song.duration}</span>
+                <BotonFavoritoMusica cancion={song} />
               </div>
             ))}
           </div>
@@ -281,6 +309,10 @@ function App() {
   // Estados para contador de días
   const [diasJuntos, setDiasJuntos] = useState(0);
 
+  // Estados para favoritos
+  const [favoritos, setFavoritos] = useState([]);
+  const [mostrarFavoritos, setMostrarFavoritos] = useState(false);
+
   // Función para calcular días transcurridos
   const calcularDiasJuntos = () => {
     const fechaInicio = new Date('2023-09-19');
@@ -288,6 +320,39 @@ function App() {
     const diferencia = fechaActual - fechaInicio;
     const milisegundosPorDia = 1000 * 60 * 60 * 24;
     return Math.floor(diferencia / milisegundosPorDia);
+  };
+
+  // Funciones para favoritos
+  const toggleFavorito = (item) => {
+    setFavoritos(prevFavoritos => {
+      const yaEsFavorito = prevFavoritos.find(fav => fav.id === item.id);
+      
+      if (yaEsFavorito) {
+        return prevFavoritos.filter(fav => fav.id !== item.id);
+      } else {
+        return [...prevFavoritos, { ...item, fechaAgregado: new Date() }];
+      }
+    });
+  };
+
+  const esFavorito = (itemId) => {
+    return favoritos.some(fav => fav.id === itemId);
+  };
+
+  // Componente BotonFavorito
+  const BotonFavorito = ({ item, className = "" }) => {
+    const isFav = esFavorito(item.id);
+    
+    return (
+      <button
+        onClick={() => toggleFavorito(item)}
+        className={`favorito ${isFav ? 'activo' : ''} ${className}`}
+        title={isFav ? 'Quitar de favoritos' : 'Agregar a favoritos'}
+      >
+        <span>{isFav ? '❤️' : '🤍'}</span>
+        <span>Agregar a favorito</span>
+      </button>
+    );
   };
 
   // Función para scroll suave
@@ -419,7 +484,14 @@ function App() {
               </div>
               
               <div className="capitulo-historia">
-                <button className="favorito">💖</button>
+                <BotonFavorito 
+                  item={{
+                    id: 'historia-primeros-dias',
+                    tipo: 'momento',
+                    titulo: 'Los Primeros Días',
+                    descripcion: 'Como no olvidar los primeros días wow, ya hace más de dos años empezamos a hablar y ahora míranos aquí juntos'
+                  }} 
+                />
                 <h3>Los Primeros Días</h3>
                 <p className="texto-historia">
                   Ay Dios mío como no olvidar los primeros días wow, ya hace más de dos años empezamos a hablar y ahora míranos aquí juntos, me acuerdo que yo te iba a acompañar
@@ -429,7 +501,14 @@ function App() {
               </div>
               
               <div className="capitulo-historia">
-                <button className="favorito">💖</button>
+                <BotonFavorito 
+                  item={{
+                    id: 'historia-especial',
+                    tipo: 'momento',
+                    titulo: 'Cuando Supimos que Era Especial',
+                    descripcion: 'El dia que supimos que era especial fue el dia del terremoto, yo decia yo no me voy a preocupar por nadie y literal ese dia yo todo preocupado'
+                  }} 
+                />
                 <h3>Cuando Supimos que Era Especial</h3>
                 <p className="texto-historia">
                 Siento que el dia que supimos que era especial o bueno yo supe que era especial fue el dia del terremoto, yo decia
@@ -440,7 +519,14 @@ function App() {
               </div>
               
               <div className="capitulo-historia">
-                <button className="favorito">💖</button>
+                <BotonFavorito 
+                  item={{
+                    id: 'historia-creciendo',
+                    tipo: 'momento',
+                    titulo: 'Creciendo Juntos',
+                    descripcion: 'Hemos tenido demasiados momentos sabes, momentos lindos, momentos no tan lindos pero siempre persiste el amor'
+                  }} 
+                />
                 <h3>Creciendo Juntos</h3>
                 <p className="texto-historia">
                   Siento que hemos tenido demasiados momentos sabes, momentos lindos, momentos no tan lindos pero siempre persiste
@@ -451,7 +537,14 @@ function App() {
               </div>
               
               <div className="capitulo-historia">
-                <button className="favorito">💖</button>
+                <BotonFavorito 
+                  item={{
+                    id: 'historia-presente',
+                    tipo: 'momento',
+                    titulo: 'El Presente',
+                    descripcion: 'Ahora siento que somos una relacion mucho mas madura de lo que eramos hace dos años flaca, hemos crecido tanto'
+                  }} 
+                />
                 <h3>El Presente</h3>
                 <p className="texto-historia">
                   Uffffff amor ahora siento que somos una relacion mucho, pero mucho mas madura de lo que eramos
@@ -470,7 +563,14 @@ function App() {
             <h2 className="titulo-seccion">Momentos Especiales</h2>
             <div className="cuadricula-momentos">
               <div className="tarjeta-momento">
-                <button className="favorito">💖</button>
+                <BotonFavorito 
+                  item={{
+                    id: 'momento-primera-cita',
+                    tipo: 'momento',
+                    titulo: 'Primera Cita',
+                    descripcion: 'No sé si cuente como primera cita las veces que te acompañaba a música pero definitivamente la primera primera fue el día que te llevé a comer sanchipapa'
+                  }} 
+                />
                 <h3>Primera Cita</h3>
                 <p>No sé si cuente como primera cita las veces que te acompañaba a música o cuando fuiste a mi cumple pero definitivamente
                     la primera primera fue el día que te llevé a comer sanchipapa, sé que fue mientras ya estábamos juntos
@@ -479,14 +579,29 @@ function App() {
               </div>
 
               <div className="tarjeta-momento">
-                <button className="favorito">💖</button>
+                <BotonFavorito 
+                  item={{
+                    id: 'momento-primer-viaje',
+                    tipo: 'momento',
+                    titulo: 'Primer Viaje Juntos',
+                    descripcion: 'Nuestro primer viaje fue a aguachica, Dios mio amor yo estaba asustado, pero asustado no es palabra, por tu papa por todo literal pero ese viaje nos dio tanta vida'
+                  }} 
+                />
                 <h3>Primer Viaje Juntos</h3>
-                <p>Nuestro prier viaje juntos fue a aguachica, Dios mio amor yo estaba asustado, pero asustado no es palabra, por tu papa por todo
+                <p>Nuestro primer viaje juntos fue a aguachica, Dios mio amor yo estaba asustado, pero asustado no es palabra, por tu papa por todo
                   literal pero ufffffff ese viaje fue, dejame decirte que ese viaje nos dio tanta vida amor y definitivamente quiero viajar mucho mas contigo.
                 </p>
               </div>
+
               <div className="tarjeta-momento">
-                <button className="favorito">💖</button>
+                <BotonFavorito 
+                  item={{
+                    id: 'momento-primer-aniversario',
+                    tipo: 'momento',
+                    titulo: 'Primer Aniversario',
+                    descripcion: 'Nuestro primer añito que fue hace tiempo pero wow que aventuras amorcito que experiencias y fue ese dia un aniversario si pues a lo que eramos nosotros'
+                  }} 
+                />
                 <h3>Primer Aniversario</h3>
                 <p>Nuestro primer añito que fue hace {diasJuntos} dias pero wow que aventuras amorcito que experiencias
                   y fue ese dia un aniversario si pues a lo que eramos nosotros, no nos vimos bien bien pero 
@@ -502,6 +617,8 @@ function App() {
           <div className="contenedor">
             <h2 className="titulo-seccion">Nuestra Galería</h2>
             <div className="cuadricula-fotos">
+              
+              {/* FOTOS 1-4 */}
               {[1, 2, 3, 4].map((num) => (
                 <div key={num} className="elemento-foto">
                   <img 
@@ -509,56 +626,88 @@ function App() {
                     alt={`Foto ${num}`} 
                     className="foto-galeria" 
                   />
-                  <button className="favorito"><span>💖</span>
-                    <span>Agregar a favorito</span>
-                  </button>
-                  
+                  <BotonFavorito 
+                    item={{
+                      id: `foto-${num}`,
+                      tipo: 'foto',
+                      titulo: `Nuestra foto ${num}`,
+                      descripcion: 'Un momento especial capturado',
+                      src: `/images/foto${num}.jpg`
+                    }} 
+                  />
                 </div>
               ))}
               
+              {/* VIDEO BARBIE */}
               <div className="elemento-foto">
                 <video 
                   src={process.env.PUBLIC_URL + "/video/barbie.mp4"} 
                   controls 
                   className="video-galeria"
                 ></video>
-                <button className="favorito"><span>💖</span>
-                    <span>Agregar a favorito</span>
-                  </button>
+                <BotonFavorito 
+                  item={{
+                    id: 'video-barbie',
+                    tipo: 'video',
+                    titulo: 'Video Barbie',
+                    descripcion: 'Nuestro momento pink favorito',
+                    src: '/video/barbie.mp4'
+                  }} 
+                />
               </div>
               
+              {/* VIDEO ROCK THAT BODY AMORCITO */}
               <div className="elemento-foto">
                 <video 
                   src={process.env.PUBLIC_URL + "/video/RockThatBodyAmorcito.mp4"} 
                   controls 
                   className="video-galeria"
                 ></video>
-                <button className="favorito"><span>💖</span>
-                    <span>Agregar a favorito</span>
-                  </button>
+                <BotonFavorito 
+                  item={{
+                    id: 'video-rock-amorcito',
+                    tipo: 'video',
+                    titulo: 'Rock That Body - Amorcito',
+                    descripcion: 'Tu baile increíble mi amor',
+                    src: '/video/RockThatBodyAmorcito.mp4'
+                  }} 
+                />
               </div>
               
+              {/* VIDEO ROCK THAT BODY YO */}
               <div className="elemento-foto">
                 <video 
                   src={process.env.PUBLIC_URL + "/video/RockThatbodyYO.mp4"} 
                   controls 
                   className="video-galeria"
                 ></video>
-                <button className="favorito"><span>💖</span>
-                    <span>Agregar a favorito</span>
-                  </button>
+                <BotonFavorito 
+                  item={{
+                    id: 'video-rock-yo',
+                    tipo: 'video',
+                    titulo: 'Rock That Body - Yo',
+                    descripcion: 'Mi intento de bailar jajaja',
+                    src: '/video/RockThatbodyYO.mp4'
+                  }} 
+                />
               </div>
               
+              {/* FOTO CUMPLEAÑOS */}
               <div className="elemento-foto">
                 <img 
                   src={process.env.PUBLIC_URL + "/images/cumple flaca.jpg"} 
                   className="foto-galeria" 
                   alt="Cumpleaños" 
                 />
-                
-                <button className="favorito"><span>💖</span>
-                    <span>Agregar a favorito</span>
-                  </button>
+                <BotonFavorito 
+                  item={{
+                    id: 'foto-cumple',
+                    tipo: 'foto',
+                    titulo: 'Tu Cumpleaños',
+                    descripcion: 'Celebrando a la persona más especial',
+                    src: '/images/cumple flaca.jpg'
+                  }}
+                  />
               </div>
               
               <div className="elemento-foto">
