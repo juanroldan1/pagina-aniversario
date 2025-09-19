@@ -1,10 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
-import playListData from './playList.json'
-//canciones
-
-
-
 
 // Componente MusicPlayer
 const MusicPlayer = ({ favoritos, toggleFavorito, esFavorito }) => {
@@ -305,10 +300,6 @@ const MusicPlayer = ({ favoritos, toggleFavorito, esFavorito }) => {
 };
 
 function App() {
-  useEffect(()=>{
-    setPlaylist(playListData.canciones);
-  },[]);
-  
   // Estados para el menú y navegación
   const [menuActivo, setMenuActivo] = useState(false);
   const [headerScrolled, setHeaderScrolled] = useState(false);
@@ -640,7 +631,7 @@ function App() {
                       id: `foto-${num}`,
                       tipo: 'foto',
                       titulo: `Nuestra foto ${num}`,
-                      descripcion: 'Un momento especial capturado',
+                      descripcion: `fotito ${num}`,
                       src: `/images/foto${num}.jpg`
                     }} 
                   />
@@ -659,7 +650,7 @@ function App() {
                     id: 'video-barbie',
                     tipo: 'video',
                     titulo: 'Video Barbie',
-                    descripcion: 'Nuestro momento pink favorito',
+                    descripcion: 'Que verguenza',
                     src: '/video/barbie.mp4'
                   }} 
                 />
@@ -677,7 +668,7 @@ function App() {
                     id: 'video-rock-amorcito',
                     tipo: 'video',
                     titulo: 'Rock That Body - Amorcito',
-                    descripcion: 'Tu baile increíble mi amor',
+                    descripcion: 'Tu rock your body',
                     src: '/video/RockThatBodyAmorcito.mp4'
                   }} 
                 />
@@ -715,44 +706,30 @@ function App() {
                     titulo: 'Tu Cumpleaños',
                     descripcion: 'Celebrando a la persona más especial',
                     src: '/images/cumple flaca.jpg'
-                  }} 
-                />
+                  }}
+                  />
               </div>
               
-              {/* FOTO CARMEN */}
               <div className="elemento-foto">
                 <img 
                   src={process.env.PUBLIC_URL + "/images/carmen.jpg"} 
                   alt="Carmen" 
                   className="foto-galeria" 
                 />
-                <BotonFavorito 
-                  item={{
-                    id: 'foto-carmen',
-                    tipo: 'foto',
-                    titulo: 'En Carmen',
-                    descripcion: 'Nuestro día en Carmen de Viboral',
-                    src: '/images/carmen.jpg'
-                  }} 
-                />
+                <button className="favorito"><span>💖</span>
+                    <span>Agregar a favorito</span>
+                  </button>
               </div>
               
-              {/* VIDEO EMOJI POP */}
               <div className="elemento-foto">
                 <video 
                   src={process.env.PUBLIC_URL + "/video/emmoji pop.mp4"} 
                   controls 
                   className="video-galeria"
                 ></video>
-                <BotonFavorito 
-                  item={{
-                    id: 'video-emoji-pop',
-                    tipo: 'video',
-                    titulo: 'Emoji Pop',
-                    descripcion: 'Jugando juntos, siempre divirtiéndonos',
-                    src: '/video/emmoji pop.mp4'
-                  }} 
-                />
+                <button className="favorito"><span>💖</span>
+                    <span>Agregar a favorito</span>
+                  </button>
               </div>
             </div>
           </div>
@@ -762,15 +739,16 @@ function App() {
         <section id="reproductor" className="seccion-musica">
           <div className="contenedor">
             <h2 className="titulo-seccion">Nuestra Música</h2>
-            <MusicPlayer 
-              favoritos={favoritos} 
-              toggleFavorito={toggleFavorito} 
-              esFavorito={esFavorito} 
-            />
+            <MusicPlayer />
           </div>
         </section>
       </main>
         
+    
+
+  
+        
+
       {/* Footer */}
       <footer>
         <div className="contenedor">
@@ -786,283 +764,6 @@ function App() {
         <button className="boton-arriba" onClick={scrollToTop}>
           ↑
         </button>
-      )}
-
-      {/* Botón flotante de favoritos */}
-      <button
-        onClick={() => setMostrarFavoritos(true)}
-        className="boton-favoritos-flotante"
-        style={{
-          position: 'fixed',
-          bottom: '20px',
-          right: '80px', // Para que no choque con el botón "arriba"
-          backgroundColor: '#e91e63',
-          color: 'white',
-          border: 'none',
-          borderRadius: '50%',
-          width: '60px',
-          height: '60px',
-          fontSize: '24px',
-          cursor: 'pointer',
-          boxShadow: '0 4px 12px rgba(233, 30, 99, 0.4)',
-          zIndex: 1000,
-          transition: 'all 0.3s ease',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-      >
-        ❤️
-        {favoritos.length > 0 && (
-          <span style={{
-            position: 'absolute',
-            top: '-5px',
-            right: '-5px',
-            backgroundColor: 'white',
-            color: '#e91e63',
-            borderRadius: '50%',
-            width: '24px',
-            height: '24px',
-            fontSize: '12px',
-            fontWeight: 'bold',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            {favoritos.length}
-          </span>
-        )}
-      </button>
-
-      {/* Panel de favoritos */}
-      {mostrarFavoritos && (
-        <div 
-          className="overlay-favoritos"
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0,0,0,0.5)',
-            zIndex: 1001,
-            display: 'flex',
-            justifyContent: 'flex-end'
-          }}
-          onClick={() => setMostrarFavoritos(false)}
-        >
-          <div 
-            className="panel-favoritos"
-            style={{
-              backgroundColor: 'white',
-              width: '400px',
-              maxWidth: '90vw',
-              height: '100%',
-              overflowY: 'auto',
-              padding: '20px',
-              boxShadow: '-4px 0 12px rgba(0,0,0,0.1)',
-              transform: 'translateX(0)',
-              transition: 'transform 0.3s ease'
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'space-between', 
-              marginBottom: '20px',
-              borderBottom: '2px solid #f0f0f0',
-              paddingBottom: '15px'
-            }}>
-              <h2 style={{ 
-                margin: 0, 
-                color: '#333',
-                fontSize: '1.5rem',
-                fontWeight: 'bold'
-              }}>
-                ❤️ Favoritos ({favoritos.length})
-              </h2>
-              <button 
-                onClick={() => setMostrarFavoritos(false)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  fontSize: '28px',
-                  cursor: 'pointer',
-                  padding: '5px',
-                  color: '#666',
-                  borderRadius: '50%',
-                  width: '40px',
-                  height: '40px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'background-color 0.2s'
-                }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = '#f0f0f0'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
-              >
-                ×
-              </button>
-            </div>
-            
-            {favoritos.length === 0 ? (
-              <div style={{ 
-                textAlign: 'center', 
-                padding: '60px 20px', 
-                color: '#666' 
-              }}>
-                <div style={{ 
-                  fontSize: '64px', 
-                  marginBottom: '20px',
-                  opacity: 0.5 
-                }}>
-                  💔
-                </div>
-                <h3 style={{ 
-                  color: '#333', 
-                  marginBottom: '10px',
-                  fontSize: '1.2rem'
-                }}>
-                  No tienes favoritos aún
-                </h3>
-                <p style={{ 
-                  fontSize: '14px',
-                  lineHeight: 1.5,
-                  opacity: 0.7
-                }}>
-                  Haz clic en ❤️ para agregar tus momentos, fotos, videos y canciones favoritas
-                </p>
-              </div>
-            ) : (
-              <div style={{ paddingBottom: '20px' }}>
-                {favoritos.map((fav) => (
-                  <div key={fav.id} style={{
-                    backgroundColor: '#f9f9f9',
-                    padding: '16px',
-                    marginBottom: '12px',
-                    borderRadius: '12px',
-                    border: '1px solid #eee',
-                    transition: 'transform 0.2s, box-shadow 0.2s',
-                    cursor: 'pointer'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.transform = 'translateY(-2px)';
-                    e.target.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.transform = 'translateY(0)';
-                    e.target.style.boxShadow = 'none';
-                  }}
-                  >
-                    <div style={{ 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      justifyContent: 'space-between',
-                      marginBottom: '8px' 
-                    }}>
-                      <span style={{
-                        backgroundColor: '#e91e63',
-                        color: 'white',
-                        padding: '4px 12px',
-                        borderRadius: '20px',
-                        fontSize: '12px',
-                        textTransform: 'capitalize',
-                        fontWeight: '500'
-                      }}>
-                        {fav.tipo === 'cancion' ? '🎵' : fav.tipo === 'video' ? '🎬' : fav.tipo === 'foto' ? '📸' : '✨'} {fav.tipo}
-                      </span>
-                      <button
-                        onClick={() => toggleFavorito(fav)}
-                        style={{
-                          background: 'none',
-                          border: 'none',
-                          fontSize: '16px',
-                          cursor: 'pointer',
-                          padding: '4px',
-                          borderRadius: '50%',
-                          transition: 'background-color 0.2s'
-                        }}
-                        title="Quitar de favoritos"
-                      >
-                        ❌
-                      </button>
-                    </div>
-                    <h4 style={{ 
-                      margin: '0 0 6px 0', 
-                      color: '#333',
-                      fontSize: '1rem',
-                      fontWeight: '600'
-                    }}>
-                      {fav.titulo}
-                    </h4>
-                    {fav.artista && (
-                      <p style={{ 
-                        margin: '0 0 6px 0', 
-                        color: '#666', 
-                        fontSize: '14px',
-                        fontStyle: 'italic'
-                      }}>
-                        por {fav.artista}
-                      </p>
-                    )}
-                    <p style={{ 
-                      margin: '0 0 10px 0', 
-                      color: '#666', 
-                      fontSize: '14px',
-                      lineHeight: 1.4
-                    }}>
-                      {fav.descripcion}
-                    </p>
-                    <p style={{ 
-                      margin: 0, 
-                      color: '#999', 
-                      fontSize: '12px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '4px'
-                    }}>
-                      🕒 Agregado: {fav.fechaAgregado.toLocaleDateString('es-ES', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                      })}
-                    </p>
-                  </div>
-                ))}
-                
-                {/* Botón para limpiar todos los favoritos */}
-                {favoritos.length > 0 && (
-                  <button
-                    onClick={() => {
-                      if (window.confirm('¿Estás seguro de que quieres eliminar todos los favoritos?')) {
-                        setFavoritos([]);
-                      }
-                    }}
-                    style={{
-                      width: '100%',
-                      padding: '12px',
-                      backgroundColor: '#ff4757',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '8px',
-                      fontSize: '14px',
-                      cursor: 'pointer',
-                      marginTop: '16px',
-                      transition: 'background-color 0.2s'
-                    }}
-                    onMouseEnter={(e) => e.target.style.backgroundColor = '#ff3838'}
-                    onMouseLeave={(e) => e.target.style.backgroundColor = '#ff4757'}
-                  >
-                    🗑️ Limpiar todos los favoritos
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
       )}
     </div>
   );
