@@ -7,7 +7,6 @@ function App() {
   const [headerScrolled, setHeaderScrolled] = useState(false);
   const [mostrarBotonArriba, setMostrarBotonArriba] = useState(false);
   const [progresoscroll, setProgresoScroll] = useState(0);
-  
   // Estados para contador de días
   const [diasJuntos, setDiasJuntos] = useState(0);
 
