@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
-import cancion1 from './music/BAD BUNNY - BAILE INOLVIDABLE (Visualizer) DEBI TIRAR MAS FOTOS.mp3';
-import cancion2 from './music/MILO J - M.A.I (Video Oficial).mp3';
-import cancion3 from "/music/El Arkeólogo - RED VELVET (Lianna & Gambeta) - (Letra) (1).mp3";
+import playListData from './playList.json'
 //canciones
 
 
@@ -307,6 +305,10 @@ const MusicPlayer = ({ favoritos, toggleFavorito, esFavorito }) => {
 };
 
 function App() {
+  useEffect(()=>{
+    setPlaylist(playListData.canciones);
+  },[]);
+  
   // Estados para el menú y navegación
   const [menuActivo, setMenuActivo] = useState(false);
   const [headerScrolled, setHeaderScrolled] = useState(false);
