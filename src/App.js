@@ -308,6 +308,7 @@ function App() {
   
   // Estados para contador de días
   const [diasJuntos, setDiasJuntos] = useState(0);
+  const{DiasDesde2024, setDiasCorto} = useState(0);
 
   // Estados para favoritos
   const [favoritos, setFavoritos] = useState([]);
@@ -322,7 +323,7 @@ function App() {
     return Math.floor(diferencia / milisegundosPorDia);
   };
 
-  const caculardesde2024 = () =>{
+  const calculardesde2024 = () =>{
     const fechaInicio = new Date('2024-09-19');
     const fechaActual = new Date();
     const diferencia = fechaActual-fechaInicio;
@@ -413,7 +414,7 @@ function App() {
 
    
 useEffect(() => {
-    setDiasCorto(caculardesde2024());
+    setDiasCorto(calculardesde2024());
     const interval = setInterval(() => {
     setDiasJuntos(calculardesde2024());
   }, 3600000);  
