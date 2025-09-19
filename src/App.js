@@ -42,7 +42,7 @@ const MusicPlayer = ({ favoritos, toggleFavorito, esFavorito }) => {
     const cargarPlaylist = async () => {
       try {
         setLoading(true);
-        const response = await fetch(process.env.PUBLIC_URL + '/playlist.json');
+        const response = await fetch(process.env.PUBLIC_URL + './music/playlist.json');
         
         if (!response.ok) {
           throw new Error('Error al cargar la playlist');
@@ -322,6 +322,15 @@ function App() {
     return Math.floor(diferencia / milisegundosPorDia);
   };
 
+  const caculardesde2024 = () =>{
+    const fechaInicio = new Date('2024-09-19');
+    const fechaActual = new Date();
+    const diferencia = fechaActual-fechaInicio;
+    const milisegundosPorDia = 1000 * 60 * 60 * 24;
+    return Math.floor(diferencia / milisegundosPorDia);
+
+  }
+
   // Funciones para favoritos
   const toggleFavorito = (item) => {
     setFavoritos(prevFavoritos => {
@@ -397,11 +406,23 @@ function App() {
   useEffect(() => {
     setDiasJuntos(calcularDiasJuntos());
     const interval = setInterval(() => {
-      setDiasJuntos(calcularDiasJuntos());
-    }, 3600000); // Actualizar cada hora
+    setDiasJuntos(calcularDiasJuntos());
+  }, 3600000); // Actualizar cada hora
+  return () => clearInterval(interval);
+}, []);
 
-    return () => clearInterval(interval);
-  }, []);
+   
+useEffect(() => {
+    setDiasCorto(caculardesde2024());
+    const interval = setInterval(() => {
+    setDiasJuntos(calculardesde2024());
+  }, 3600000);  
+  
+  return()=>clearInterval(interval);
+},[]);
+
+
+
 
   return (
     <div className="App">
@@ -603,7 +624,7 @@ function App() {
                   }} 
                 />
                 <h3>Primer Aniversario</h3>
-                <p>Nuestro primer añito que fue hace {diasJuntos} dias pero wow que aventuras amorcito que experiencias
+                <p>Nuestro primer añito que fue hace {DiasDesde2024} dias pero wow que aventuras amorcito que experiencias
                   y fue ese dia un aniversario si pues a lo que eramos nosotros, no nos vimos bien bien pero 
                   en el fin de semana lo celebramos, fuimos a cine y comimos a nuestra manera, nuestro primer añito.
                 </p>
