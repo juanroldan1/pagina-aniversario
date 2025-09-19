@@ -537,7 +537,7 @@ useEffect(() => {
                 yo no me voy a preocupar por nadie y literal ese dia yo todo preocupado que si estabas bien que como estaba Ana, ay Dios
                 y llegar a la casa buscar internet porque no tenia internet y escribirte si estabas bien, realmente en ese dia 
                 supe que ya era otro nivel.
-                </p>
+                </p>  
               </div>
               
               <div className="capitulo-historia">
