@@ -42,7 +42,7 @@ const MusicPlayer = ({ favoritos, toggleFavorito, esFavorito }) => {
     const cargarPlaylist = async () => {
       try {
         setLoading(true);
-        const response = await fetch(process.env.PUBLIC_URL + './music/playlist.json');
+        const response = await fetch(process.env.PUBLIC_URL + '/music/playlist.json');
         
         if (!response.ok) {
           throw new Error('Error al cargar la playlist');
