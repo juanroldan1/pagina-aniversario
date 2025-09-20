@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
+import { createReactPlayer } from 'react-player/ReactPlayer';
 
 function App() {
   // Estados para el menú y navegación
@@ -9,6 +10,7 @@ function App() {
   const [progresoscroll, setProgresoScroll] = useState(0);
   // Estados para contador de días
   const [diasJuntos, setDiasJuntos] = useState(0);
+  const[diasdesde2024,setDiasdesde2024] = useState(0);
 
   // Estados para favoritos
   const [favoritos, setFavoritos] = useState([]);
@@ -17,6 +19,14 @@ function App() {
   // Función para calcular días transcurridos
   const calcularDiasJuntos = () => {
     const fechaInicio = new Date('2023-09-19');
+    const fechaActual = new Date();
+    const diferencia = fechaActual - fechaInicio;
+    const milisegundosPorDia = 1000 * 60 * 60 * 24;
+    return Math.floor(diferencia / milisegundosPorDia);
+  };
+
+  const calculardesde2024 = ()=>{
+    const fechaInicio = new Date('2024-09-19');
     const fechaActual = new Date();
     const diferencia = fechaActual - fechaInicio;
     const milisegundosPorDia = 1000 * 60 * 60 * 24;
@@ -103,11 +113,23 @@ function App() {
 
     return () => clearInterval(interval);
   }, []);
+  
+    useEffect(() => {
+    setDiasdesde2024(calculardesde2024());
+    const interval = setInterval(() => {
+      setDiasdesde2024(calculardesde2024());
+    }, 3600000); // Actualizar cada hora
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="App">
       {/* Indicador de progreso */}
       <div 
+      
+      
+
         className="indicador-scroll" 
         style={{ width: `${progresoscroll}%` }}
       />
@@ -300,7 +322,13 @@ function App() {
               </div>
 
               <div className="tarjeta-momento">
-                <BotonFavorito 
+               
+                <h3>Primer Aniversario</h3>
+                <p>Nuestro primer añito que fue hace {diasdesde2024} dias pero wow que aventuras amorcito que experiencias
+                  y fue ese dia un aniversario si pues a lo que eramos nosotros, no nos vimos bien bien pero 
+                  en el fin de semana lo celebramos, fuimos a cine y comimos a nuestra manera, nuestro primer añito.
+                </p>
+                 <BotonFavorito 
                   item={{
                     id: 'momento-primer-aniversario',
                     tipo: 'momento',
@@ -308,24 +336,21 @@ function App() {
                     descripcion: 'Nuestro primer añito que fue hace tiempo pero wow que aventuras amorcito que experiencias y fue ese dia un aniversario si pues a lo que eramos nosotros'
                   }} 
                 />
-                <h3>Primer Aniversario</h3>
-                <p>Nuestro primer añito que fue hace {diasJuntos} dias pero wow que aventuras amorcito que experiencias
-                  y fue ese dia un aniversario si pues a lo que eramos nosotros, no nos vimos bien bien pero 
-                  en el fin de semana lo celebramos, fuimos a cine y comimos a nuestra manera, nuestro primer añito.
-                </p>
               </div>
+
             </div>
           </div>
         </section>
 
         {/* Sección Galería */}
+         {/* Sección fotos*/}
         <section id="galeria" className="seccion-galeria">
           <div className="contenedor">
             <h2 className="titulo-seccion">Nuestra Galería</h2>
             <div className="cuadricula-fotos">
               
-              {/* FOTOS 1-4 */}
-              {[1, 2, 3, 4].map((num) => (
+              {/* FOTOS 1-8 */}
+              {[1, 2, 3, 4,5,6,7,8,9,10,11].map((num) => (
                 <div key={num} className="elemento-foto">
                   <img 
                     src={process.env.PUBLIC_URL + `/images/foto${num}.jpg`} 
@@ -337,7 +362,7 @@ function App() {
                       id: `foto-${num}`,
                       tipo: 'foto',
                       titulo: `Nuestra foto ${num}`,
-                      descripcion: 'Un momento especial capturado',
+                      descripcion: 'fotito',
                       src: `/images/foto${num}.jpg`
                     }} 
                   />
@@ -356,7 +381,7 @@ function App() {
                     id: 'video-barbie',
                     tipo: 'video',
                     titulo: 'Video Barbie',
-                    descripcion: 'Nuestro momento pink favorito',
+                    descripcion: 'Que penita',
                     src: '/video/barbie.mp4'
                   }} 
                 />
@@ -374,7 +399,7 @@ function App() {
                     id: 'video-rock-amorcito',
                     tipo: 'video',
                     titulo: 'Rock That Body - Amorcito',
-                    descripcion: 'Tu baile increíble mi amor',
+                    descripcion: 'Tu RockYourbody',
                     src: '/video/RockThatBodyAmorcito.mp4'
                   }} 
                 />
@@ -392,7 +417,7 @@ function App() {
                     id: 'video-rock-yo',
                     tipo: 'video',
                     titulo: 'Rock That Body - Yo',
-                    descripcion: 'Mi intento de bailar jajaja',
+                    descripcion: 'Mi rockMyBody',
                     src: '/video/RockThatbodyYO.mp4'
                   }} 
                 />
@@ -410,7 +435,7 @@ function App() {
                     id: 'foto-cumple',
                     tipo: 'foto',
                     titulo: 'Tu Cumpleaños',
-                    descripcion: 'Celebrando a la persona más especial',
+                    descripcion: 'Tu pumple',
                     src: '/images/cumple flaca.jpg'
                   }} 
                 />
@@ -428,7 +453,7 @@ function App() {
                     id: 'foto-carmen',
                     tipo: 'foto',
                     titulo: 'En Carmen',
-                    descripcion: 'Nuestro día en Carmen de Viboral',
+                    descripcion: 'ilegal con mi mujer',
                     src: '/images/carmen.jpg'
                   }} 
                 />
@@ -446,14 +471,92 @@ function App() {
                     id: 'video-emoji-pop',
                     tipo: 'video',
                     titulo: 'Emoji Pop',
-                    descripcion: 'Jugando juntos, siempre divirtiéndonos',
+                    descripcion: 'que pena',
                     src: '/video/emmoji pop.mp4'
+                  }} 
+                  />
+                  </div>
+              {/*Video beso drogadicto */}
+              <div className="elemento-foto">
+                <video 
+                  src={process.env.PUBLIC_URL + "/video/heylover.mp4"} 
+                  controls 
+                  className="video-galeria"
+                ></video>
+                <BotonFavorito 
+                  item={{
+                    id: 'video-rock-amorcito',
+                    tipo: 'video',
+                    titulo: 'Rock That Body - Amorcito',
+                    descripcion: 'Tu RockYourbody',
+                    src: '/video/heylover.mp4'
                   }} 
                 />
               </div>
-            </div>
-          </div>
-        </section>
+              {/*beso drogadicto*/}
+              <div className="elemento-foto">
+                <video 
+                  src={process.env.PUBLIC_URL + "/video/beso drogadicto.mp4"} 
+                  controls 
+                  className="video-galeria"
+                ></video>
+                <BotonFavorito 
+                  item={{
+                    id: 'video-rock-amorcito',
+                    tipo: 'video',
+                    titulo: 'Rock That Body - Amorcito',
+                    descripcion: 'Tu RockYourbody',
+                    src: '/video/beso drogadicto.mp4'
+                  }} 
+                />
+              </div>
+              {/*corazoncito */}
+              <div className="elemento-foto">
+                <video 
+                  src={process.env.PUBLIC_URL + "/video/corazon.mp4"} 
+                  controls 
+                  className="video-galeria"
+                ></video>
+                <BotonFavorito 
+                  item={{
+                    id: 'video-rock-amorcito',
+                    tipo: 'video',
+                    titulo: 'Rock That Body - Amorcito',
+                    descripcion: 'Tu RockYourbody',
+                    src: '/video/corazon.mp4'
+                  }} 
+                />
+              </div>
+              {/*aniversario */}
+               {[1, 2,4,5,6].map((num) => (
+                <div key={num} className="elemento-foto">
+                  <img 
+                    src={process.env.PUBLIC_URL + `/images/aniversario${num}.jpg`} 
+                    alt={`aniversario ${num}`} 
+                    className="foto-galeria" 
+                  />
+                  <BotonFavorito 
+                    item={{
+                      id: `foto-aniversario-${num}`,
+                      tipo: 'foto',
+                      titulo: `fotito aniversario ${num}`,
+                      descripcion: 'fotito',
+                      src: `/images/aniversario${num}.jpg`
+                    }} 
+                  />
+                </div>
+              ))}
+              
+            
+                  {/*Proximamente */}
+                   <div className="elemento-proximamente">
+                <h2 className='contenido-carta'>proximamente mas fotos y 
+                  videos...</h2>
+              </div>
+                  </div>
+                </div>
+               
+              </section>
         {/*seccion cartas*/}
         <section id ="cartas" className='cartas'>
                 <h1 className='titulo-seccion'>cartas</h1>
