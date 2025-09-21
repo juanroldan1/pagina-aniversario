@@ -527,6 +527,59 @@ function App() {
                   }} 
                 />
               </div>
+              {/*cartasAlAmor */}
+                <div className='elemento-foto'>
+                  <video src={process.env.PUBLIC_URL + '/video/cartasAlamor.mp4'}
+                  controls
+                  className='video-galeria'>
+                  
+                  
+                  </video>
+                  <BotonFavorito
+                  item={{
+                    id:'cartas-al-amor',
+                    tipo:'video',
+                    titulo:'cartas-al-amor',
+                    descripcion:'videito',
+                    src:'/video/cartasAlamor.mp4'
+                  }}
+                  />
+                </div>
+                {/*coleccion de recuerdos */}
+                <div className='elemento-foto'>
+                  <video src={process.env.PUBLIC_URL+'/video/coleccion de recuerdos.mp4'}
+                  controls
+                  className='video-galeria'>
+                  </video>
+                  <BotonFavorito
+                  item={{
+                    id:'coleccinonandoRecuerdos',
+                    tipo:'video',
+                    titulo:'ColeccionandoRecuerdos',
+                    descripcion:'videito',
+                    src:'/video/cartasAlamor.mp4'
+                  }}
+                  />
+                </div>
+                {/*masriposas*/}
+                <div className='elemento-foto'>
+                  <video src={process.env.PUBLIC_URL+'/video/masriposas.mp4'}
+                  controls
+                  className='video-galeria'>
+                  </video>
+                    <BotonFavorito
+                    item={{
+                      id:'mariposas',
+                      tipo:'video',
+                      titulo:'Querer querernos mariposas',
+                      descripcion:'que feeling',
+                      src:'/video/masriposas.mp4'
+                    }}
+                    />
+                </div>
+                
+                    
+
               {/*aniversario */}
                {[1, 2,4,5,6].map((num) => (
                 <div key={num} className="elemento-foto">
@@ -558,9 +611,9 @@ function App() {
                
               </section>
         {/*seccion cartas*/}
-        <section id ="cartas" className='cartas'>
-                <h1 className='titulo-seccion'>cartas</h1>
+        <section id ="cartas" className='seccion-galeria'>
                 <div className='contenedor'></div>
+                <h1 className='titulo-seccion'>cartas</h1>
                 <div className='carta'>
                   <BotonFavorito
                 item={{
