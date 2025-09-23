@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
-import { createReactPlayer } from 'react-player/ReactPlayer';
+
 
 function App() {
   // Estados para el menú y navegación
@@ -599,6 +599,42 @@ function App() {
                   />
                 </div>
               ))}
+
+              {/* loMejor de esta historia*/}
+                              <div className='elemento-foto'>
+                  <video src={process.env.PUBLIC_URL+'/video/loMejorDesestaHistoria.mp4'}
+                  controls
+                  className='video-galeria'>
+                  </video>
+                    <BotonFavorito
+                    item={{
+                      id:'lomejordeestahistoria',
+                      tipo:'video',
+                      titulo:'lo mejor de esta historia es que eres mi compañera',
+                      descripcion:'guau',
+                      src:'/video/loMejorDesestaHistoria.mp4'
+                    }}
+                    />
+                </div>
+                {/*What is love */}
+                <div className='elemento-foto'>
+                  <video src={process.env.PUBLIC_URL+'/video/love.mp4'}
+                  controls
+                  className='video-galeria'>
+                  </video>
+                    <BotonFavorito
+                    item={{
+                      id:'what is love?',
+                      tipo:'video',
+                      titulo:'What is love?',
+                      descripcion:'pues obviamente que tu mi hermosa',
+                      src:'/video/love.mp4'
+                    }}
+                    />
+                </div>
+                  
+                  
+
               
             
                   {/*Proximamente */}
@@ -614,6 +650,7 @@ function App() {
         <section id ="cartas" className='seccion-galeria'>
                 <div className='contenedor'></div>
                 <h1 className='titulo-seccion'>cartas</h1>
+                {/*Carta principal */}
                 <div className='carta'>
                   <BotonFavorito
                 item={{
@@ -624,7 +661,7 @@ function App() {
                 }
               }/>
                 
-                  <h3>19/09/2024</h3>
+                  <h3>19/09/2025</h3>
                   <p className='contenido-carta'>
                   hola mi vida, esta es la primera carta de la pagina, que pensabas? que era solo para hoy? no mi vida esta pagina es para siempre mi hermosa,
                   cada dia voy a ir poniendo una cartica para ti mi hermosa un dia x asi que te pido que descargues esto y cada que te diga que lo actualize que lo vayas viendo 
@@ -636,11 +673,28 @@ function App() {
                   </p>
                   <p className='firma-carta'>con muhcho amor tu flaco</p>
                 </div>
-
-                
+              {/*Just because */}
+              <div className='carta'>
+                <BotonFavorito
+                item={{
+                  id:"carta porque si",
+                  tipo:"carta",
+                  titulo:"Just because",
+                  descripcion:"una cartita porque si"
+                }}
+                />
+                <h3>Carta porque si</h3>
+                <p className='contenido-carta'>hola mi hermosa, como estas mi hermosa
+                  espero estes muy bien amada mia hoy siendo 22/09/2025
+                  quiero escribirte una carta porque si asi que amor, hoy te doy las gracias
+                  por ser la mujer a la que amo y a la mujer que hace que mis ojitos brillen
+                  enserio gracias por amarme de la manera en la que me amas
+                  simplemente Te amo
+                </p>
+                <p className='firma-carta'>de tu hombre que te ama con el alma</p>
+              </div>
         </section>
       </main>
-        
       {/* Footer */}
       <footer>
         <div className="contenedor">
@@ -650,291 +704,295 @@ function App() {
           </div>
         </div>
       </footer>
-
       {/* Botón volver arriba */}
       {mostrarBotonArriba && (
         <button className="boton-arriba" onClick={scrollToTop}>
           ↑
         </button>
-      )}
-
+              )}
       {/* Botón flotante de favoritos */}
       <button
-        onClick={() => setMostrarFavoritos(true)}
-        className="boton-favoritos-flotante"
-        style={{
-          position: 'fixed',
-          bottom: '20px',
-          right: '80px', // Para que no choque con el botón "arriba"
-          backgroundColor: '#e91e63',
-          color: 'white',
-          border: 'none',
+      onClick={() => setMostrarFavoritos(true)}
+      className="boton-favoritos-flotante"
+      style={{
+        position: 'fixed',
+        bottom: '20px',
+        right: '80px', // Para que no choque con el botón "arriba"
+        backgroundColor: '#e91e63',
+        color: 'white',
+        border: 'none',
+        borderRadius: '50%',
+        width: '60px',
+        height: '60px',
+        fontSize: '24px',
+        cursor: 'pointer',
+        boxShadow: '0 4px 12px rgba(233, 30, 99, 0.4)',
+        zIndex: 1000,
+        transition: 'all 0.3s ease',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+      ❤️
+      {favoritos.length > 0 && (
+        <span style={{
+          position: 'absolute',
+          top: '-5px',
+          right: '-5px',
+          backgroundColor: 'white',
+          color: '#e91e63',
           borderRadius: '50%',
-          width: '60px',
-          height: '60px',
-          fontSize: '24px',
-          cursor: 'pointer',
-          boxShadow: '0 4px 12px rgba(233, 30, 99, 0.4)',
-          zIndex: 1000,
-          transition: 'all 0.3s ease',
+          width: '24px',
+          height: '24px',
+          fontSize: '12px',
+          fontWeight: 'bold',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-        ❤️
-        {favoritos.length > 0 && (
-          <span style={{
-            position: 'absolute',
-            top: '-5px',
-            right: '-5px',
-            backgroundColor: 'white',
-            color: '#e91e63',
-            borderRadius: '50%',
-            width: '24px',
-            height: '24px',
-            fontSize: '12px',
-            fontWeight: 'bold',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            {favoritos.length}
-          </span>
-        )}
-      </button>
+          {favoritos.length}
+        </span>
+      )}
+    </button>
 
-      {/* Panel de favoritos */}
-      {mostrarFavoritos && (
+    {/* Panel de favoritos */}
+    {mostrarFavoritos && (
+      <div 
+        className="overlay-favoritos"
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.5)',
+          zIndex: 1001,
+          display: 'flex',
+          justifyContent: 'flex-end'
+        }}
+        onClick={() => setMostrarFavoritos(false)}
+      >
         <div 
-          className="overlay-favoritos"
+          className="panel-favoritos"
           style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0,0,0,0.5)',
-            zIndex: 1001,
-            display: 'flex',
-            justifyContent: 'flex-end'
+            backgroundColor: 'white',
+            width: '400px',
+            maxWidth: '90vw',
+            height: '100%',
+            overflowY: 'auto',
+            padding: '20px',
+            boxShadow: '-4px 0 12px rgba(0,0,0,0.1)',
+            transform: 'translateX(0)',
+            transition: 'transform 0.3s ease'
           }}
-          onClick={() => setMostrarFavoritos(false)}
+          onClick={(e) => e.stopPropagation()}
         >
-          <div 
-            className="panel-favoritos"
-            style={{
-              backgroundColor: 'white',
-              width: '400px',
-              maxWidth: '90vw',
-              height: '100%',
-              overflowY: 'auto',
-              padding: '20px',
-              boxShadow: '-4px 0 12px rgba(0,0,0,0.1)',
-              transform: 'translateX(0)',
-              transition: 'transform 0.3s ease'
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'space-between', 
-              marginBottom: '20px',
-              borderBottom: '2px solid #f0f0f0',
-              paddingBottom: '15px'
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'space-between', 
+            marginBottom: '20px',
+            borderBottom: '2px solid #f0f0f0',
+            paddingBottom: '15px'
+          }}>
+            <h2 style={{ 
+              margin: 0, 
+              color: '#333',
+              fontSize: '1.5rem',
+              fontWeight: 'bold'
             }}>
-              <h2 style={{ 
-                margin: 0, 
-                color: '#333',
-                fontSize: '1.5rem',
-                fontWeight: 'bold'
-              }}>
-                ❤️ Favoritos ({favoritos.length})
-              </h2>
-              <button 
-                onClick={() => setMostrarFavoritos(false)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  fontSize: '28px',
-                  cursor: 'pointer',
-                  padding: '5px',
-                  color: '#666',
-                  borderRadius: '50%',
-                  width: '40px',
-                  height: '40px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'background-color 0.2s'
-                }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = '#f0f0f0'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
-              >
-                ×
-              </button>
-            </div>
-            
-            {favoritos.length === 0 ? (
+              ❤️ Favoritos ({favoritos.length})
+            </h2>
+            <button 
+              onClick={() => setMostrarFavoritos(false)}
+              style={{
+                background: 'none',
+                border: 'none',
+                fontSize: '28px',
+                cursor: 'pointer',
+                padding: '5px',
+                color: '#666',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'background-color 0.2s'
+              }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = '#f0f0f0'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+            >
+              ×
+            </button>
+          </div>
+          
+          {favoritos.length === 0 ? (
+            <div style={{ 
+              textAlign: 'center', 
+              padding: '60px 20px', 
+              color: '#666' 
+            }}>
               <div style={{ 
-                textAlign: 'center', 
-                padding: '60px 20px', 
-                color: '#666' 
+                fontSize: '64px', 
+                marginBottom: '20px',
+                opacity: 0.5 
               }}>
-                <div style={{ 
-                  fontSize: '64px', 
-                  marginBottom: '20px',
-                  opacity: 0.5 
-                }}>
-                  💔
-                </div>
-                <h3 style={{ 
-                  color: '#333', 
-                  marginBottom: '10px',
-                  fontSize: '1.2rem'
-                }}>
-                  No tienes favoritos aún
-                </h3>
-                <p style={{ 
-                  fontSize: '14px',
-                  lineHeight: 1.5,
-                  opacity: 0.7
-                }}>
-                  Haz clic en ❤️ para agregar tus momentos, fotos, videos y canciones favoritas
-                </p>
+                💔
               </div>
-            ) : (
-              <div style={{ paddingBottom: '20px' }}>
-                {favoritos.map((fav) => (
-                  <div key={fav.id} style={{
-                    backgroundColor: '#f9f9f9',
-                    padding: '16px',
-                    marginBottom: '12px',
-                    borderRadius: '12px',
-                    border: '1px solid #eee',
-                    transition: 'transform 0.2s, box-shadow 0.2s',
-                    cursor: 'pointer'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.transform = 'translateY(-2px)';
-                    e.target.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.transform = 'translateY(0)';
-                    e.target.style.boxShadow = 'none';
-                  }}
-                  >
-                    <div style={{ 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      justifyContent: 'space-between',
-                      marginBottom: '8px' 
+              <h3 style={{ 
+                color: '#333', 
+                marginBottom: '10px',
+                fontSize: '1.2rem'
+              }}>
+                No tienes favoritos aún
+              </h3>
+              <p style={{ 
+                fontSize: '14px',
+                lineHeight: 1.5,
+                opacity: 0.7
+              }}>
+                Haz clic en ❤️ para agregar tus momentos, fotos, videos y canciones favoritas
+              </p>
+            </div>
+          ) : (
+            <div style={{ paddingBottom: '20px' }}>
+              {favoritos.map((fav) => (
+                <div key={fav.id} style={{
+                  backgroundColor: '#f9f9f9',
+                  padding: '16px',
+                  marginBottom: '12px',
+                  borderRadius: '12px',
+                  border: '1px solid #eee',
+                  transition: 'transform 0.2s, box-shadow 0.2s',
+                  cursor: 'pointer'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'translateY(-2px)';
+                  e.target.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'translateY(0)';
+                  e.target.style.boxShadow = 'none';
+                }}
+                >
+                  <div style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'space-between',
+                    marginBottom: '8px' 
+                  }}>
+                    <span style={{
+                      backgroundColor: '#e91e63',
+                      color: 'white',
+                      padding: '4px 12px',
+                      borderRadius: '20px',
+                      fontSize: '12px',
+                      textTransform: 'capitalize',
+                      fontWeight: '500'
                     }}>
-                      <span style={{
-                        backgroundColor: '#e91e63',
-                        color: 'white',
-                        padding: '4px 12px',
-                        borderRadius: '20px',
-                        fontSize: '12px',
-                        textTransform: 'capitalize',
-                        fontWeight: '500'
-                      }}>
-                        {fav.tipo === 'cancion' ? '🎵' : fav.tipo === 'video' ? '🎬' : fav.tipo === 'foto' ? '📸' : '✨'} {fav.tipo}
-                      </span>
-                      <button
-                        onClick={() => toggleFavorito(fav)}
-                        style={{
-                          background: 'none',
-                          border: 'none',
-                          fontSize: '16px',
-                          cursor: 'pointer',
-                          padding: '4px',
-                          borderRadius: '50%',
-                          transition: 'background-color 0.2s'
-                        }}
-                        title="Quitar de favoritos"
-                      >
-                        ❌
-                      </button>
-                    </div>
-                    <h4 style={{ 
-                      margin: '0 0 6px 0', 
-                      color: '#333',
-                      fontSize: '1rem',
-                      fontWeight: '600'
-                    }}>
-                      {fav.titulo}
-                    </h4>
-                    {fav.artista && (
-                      <p style={{ 
-                        margin: '0 0 6px 0', 
-                        color: '#666', 
-                        fontSize: '14px',
-                        fontStyle: 'italic'
-                      }}>
-                        por {fav.artista}
-                      </p>
-                    )}
+                      {fav.tipo === 'cancion' ? '🎵' : fav.tipo === 'video' ? '🎬' : fav.tipo === 'foto' ? '📸' : '✨'} {fav.tipo}
+                    </span>
+                    <button
+                      onClick={() => toggleFavorito(fav)}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        fontSize: '16px',
+                        cursor: 'pointer',
+                        padding: '4px',
+                        borderRadius: '50%',
+                        transition: 'background-color 0.2s'
+                      }}
+                      title="Quitar de favoritos"
+                    >
+                      ❌
+                    </button>
+                  </div>
+                  <h4 style={{ 
+                    margin: '0 0 6px 0', 
+                    color: '#333',
+                    fontSize: '1rem',
+                    fontWeight: '600'
+                  }}>
+                    {fav.titulo}
+                  </h4>
+                  {fav.artista && (
                     <p style={{ 
-                      margin: '0 0 10px 0', 
+                      margin: '0 0 6px 0', 
                       color: '#666', 
                       fontSize: '14px',
-                      lineHeight: 1.4
+                      fontStyle: 'italic'
                     }}>
-                      {fav.descripcion}
+                      por {fav.artista}
                     </p>
-                    <p style={{ 
-                      margin: 0, 
-                      color: '#999', 
-                      fontSize: '12px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '4px'
-                    }}>
-                      🕒 Agregado: {fav.fechaAgregado.toLocaleDateString('es-ES', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                      })}
-                    </p>
-                  </div>
-                ))}
-                
-                {/* Botón para limpiar todos los favoritos */}
-                {favoritos.length > 0 && (
-                  <button
-                    onClick={() => {
-                      if (window.confirm('¿Estás seguro de que quieres eliminar todos los favoritos?')) {
-                        setFavoritos([]);
-                      }
-                    }}
-                    style={{
-                      width: '100%',
-                      padding: '12px',
-                      backgroundColor: '#ff4757',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '8px',
-                      fontSize: '14px',
-                      cursor: 'pointer',
-                      marginTop: '16px',
-                      transition: 'background-color 0.2s'
-                    }}
-                    onMouseEnter={(e) => e.target.style.backgroundColor = '#ff3838'}
-                    onMouseLeave={(e) => e.target.style.backgroundColor = '#ff4757'}
-                  >
-                    🗑️ Limpiar todos los favoritos
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
+                  )}
+                  <p style={{ 
+                    margin: '0 0 10px 0', 
+                    color: '#666', 
+                    fontSize: '14px',
+                    lineHeight: 1.4
+                  }}>
+                    {fav.descripcion}
+                  </p>
+                  <p style={{ 
+                    margin: 0, 
+                    color: '#999', 
+                    fontSize: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px'
+                  }}>
+                    🕒 Agregado: {fav.fechaAgregado.toLocaleDateString('es-ES', {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    })}
+                  </p>
+                </div>
+              ))}
+              
+              {/* Botón para limpiar todos los favoritos */}
+              {favoritos.length > 0 && (
+                <button
+                  onClick={() => {
+                    if (window.confirm('¿Estás seguro de que quieres eliminar todos los favoritos?')) {
+                      setFavoritos([]);
+                    }
+                  }}
+                  style={{
+                    width: '100%',
+                    padding: '12px',
+                    backgroundColor: '#ff4757',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '8px',
+                    fontSize: '14px',
+                    cursor: 'pointer',
+                    marginTop: '16px',
+                    transition: 'background-color 0.2s'
+                  }}
+                  onMouseEnter={(e) => e.target.style.backgroundColor = '#ff3838'}
+                  onMouseLeave={(e) => e.target.style.backgroundColor = '#ff4757'}
+                >
+                  🗑️ Limpiar todos los favoritos
+                </button>
+              )}
+            </div>
+          )}
         </div>
-      )}
-    </div>
-  );
+      </div>
+    )}
+  </div>
+);
 }
 
 export default App;
+                
+                
+        
+                
+                
+
