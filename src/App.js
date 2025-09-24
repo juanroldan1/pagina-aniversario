@@ -693,6 +693,28 @@ function App() {
                 </p>
                 <p className='firma-carta'>de tu hombre que te ama con el alma</p>
               </div>
+              {/*Gracias por todo*/}
+              <div className='carta'>
+                <BotonFavorito
+                item={{
+                  id:"<3",
+                  tipo:"carta",
+                  titulo:"11.11 <3",
+                  descripcion:"<3"
+                }}
+                />
+                <h3>Carta porque si</h3>
+                <p className='contenido-carta'>Hola, hoy no es para alegrarnos y hoy no es para hablarte
+                  lo mucho que estoy enamorado de ti, quiero simplemente decirte que gracias, perdon por durante 
+                  este tiempo darte una relacion asi de mala, perdon por hacerte aguantar todo eso que aguantaste
+                  todo ese tiempo, perdon perdon perdon por siempre, no soy un buen hombre y solo buscaba mi bienestar
+                  simplemente perdon y se que esto no es una manera de pedir perdon, espero que algun dia entres en la app y leas esto
+                  simplemente te amo, perdoname por no ser un buen hombre para ti, un hombre al que le tengas miedo y
+                  un hombre al que no le cuentes las cosas, perdona por ser ese hombre que te hacia sufrir y solo
+                  se preocupaba por el mismo y no por lo que sentias, perdoname y nada TE AMO.
+                </p>
+                <p className='firma-carta'>Gracias por todo flaca, te amo</p>
+              </div>
         </section>
       </main>
       {/* Footer */}
