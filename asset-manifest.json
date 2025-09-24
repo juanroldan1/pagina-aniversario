@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/pagina-aniversario/static/css/main.9aa6a922.css",
-    "main.js": "/pagina-aniversario/static/js/main.93e409a5.js",
+    "main.js": "/pagina-aniversario/static/js/main.ab97931a.js",
     "static/js/453.b4c7044d.chunk.js": "/pagina-aniversario/static/js/453.b4c7044d.chunk.js",
     "index.html": "/pagina-aniversario/index.html",
     "main.9aa6a922.css.map": "/pagina-aniversario/static/css/main.9aa6a922.css.map",
-    "main.93e409a5.js.map": "/pagina-aniversario/static/js/main.93e409a5.js.map",
+    "main.ab97931a.js.map": "/pagina-aniversario/static/js/main.ab97931a.js.map",
     "453.b4c7044d.chunk.js.map": "/pagina-aniversario/static/js/453.b4c7044d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9aa6a922.css",
-    "static/js/main.93e409a5.js"
+    "static/js/main.ab97931a.js"
   ]
 }
