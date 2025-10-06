@@ -498,6 +498,316 @@ section {
     margin-bottom: 1rem;
     font-size: 1.5rem;
 }
+/* ==== ESTILOS PARA LA SECCIÓN DE CARTAS CON GOOGLE SHEETS ==== */
+
+.seccion-cartas {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  min-height: 100vh;
+  padding: 60px 20px;
+}
+
+/* Acciones principales */
+.cartas-acciones {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.boton-nueva-carta,
+.boton-recargar {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+  border: none;
+  color: white;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  font-weight: bold;
+}
+
+.boton-nueva-carta:hover,
+.boton-recargar:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.boton-recargar {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  margin-top: 20px;
+}
+
+/* Mensajes de feedback */
+.mensaje-feedback {
+  text-align: center;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 20px auto;
+  max-width: 600px;
+  font-weight: 500;
+  animation: slideDown 0.3s ease;
+}
+
+.mensaje-feedback.exito {
+  background: rgba(76, 175, 80, 0.2);
+  border: 2px solid #4caf50;
+  color: #2e7d32;
+}
+
+.mensaje-feedback.error {
+  background: rgba(244, 67, 54, 0.2);
+  border: 2px solid #f44336;
+  color: #c62828;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Formulario de nueva carta */
+.formulario-carta {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  margin: 30px auto;
+  animation: fadeInUp 0.4s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.campo-formulario {
+  margin-bottom: 25px;
+}
+
+.campo-formulario label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.campo-formulario input,
+.campo-formulario textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.campo-formulario input:focus,
+.campo-formulario textarea:focus {
+  outline: none;
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+.campo-formulario textarea {
+  resize: vertical;
+  min-height: 150px;
+  line-height: 1.6;
+}
+
+.contador-caracteres {
+  display: block;
+  text-align: right;
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.boton-enviar-carta {
+  width: 100%;
+  background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+  border: none;
+  color: white;
+  padding: 15px;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.boton-enviar-carta:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.boton-enviar-carta:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Contenedor de cartas */
+.contenedor-cartas {
+  margin-top: 40px;
+}
+
+.cargando-cartas {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.spinner {
+  font-size: 4rem;
+  animation: rotar 2s linear infinite;
+  margin-bottom: 20px;
+}
+
+.sin-cartas {
+  text-align: center;
+  padding: 60px 20px;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Lista de cartas */
+.lista-cartas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.carta {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #ff6b6b;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.carta::before {
+  content: '💌';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  font-size: 8rem;
+  opacity: 0.05;
+  transform: rotate(15deg);
+}
+
+.carta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.carta-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.carta-header h3 {
+  color: #ff6b6b;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.carta-fecha {
+  font-size: 0.85rem;
+  color: #999;
+  font-style: italic;
+}
+
+.contenido-carta {
+  margin: 20px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.contenido-carta p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #444;
+  font-family: 'Georgia', serif;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.carta-footer {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 2px solid #f0f0f0;
+}
+
+.carta-decoracion {
+  color: #ff6b6b;
+  font-size: 1.2rem;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .lista-cartas {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .formulario-carta {
+    padding: 20px;
+  }
+  
+  .carta {
+    padding: 20px;
+  }
+  
+  .carta-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .boton-nueva-carta,
+  .boton-recargar {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+  
+  .campo-formulario label {
+    font-size: 1rem;
+  }
+  
+  .carta-header h3 {
+    font-size: 1.1rem;
+  }
+  
+  .contenido-carta p {
+    font-size: 0.95rem;
+  }
+}
 
 
 /* Estilos para footer */

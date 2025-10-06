@@ -2,6 +2,211 @@ import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 
+
+const SeccionCartas = () => {
+  const [cartas, setCartas] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [nombre, setNombre] = useState('');
+  const [carta, setCarta] = useState('');
+  const [mensaje, setMensaje] = useState('');
+  const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [enviando, setEnviando] = useState(false);
+
+  // ⚠️ IMPORTANTE: Reemplaza esta URL con la de tu Google Apps Script
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz4fukxfbEUDCJzvWeOLCVjO2B9pRK2M0Gz9sKJ4SZv_9tlvM71enr0foXO71D2IqUKiw/exec';
+
+  // Cargar cartas al montar el componente
+  useEffect(() => {
+    cargarCartas();
+  }, []);
+
+  const cargarCartas = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(SCRIPT_URL);
+      const data = await response.json();
+      
+      if (data.success) {
+        setCartas(data.cartas);
+      } else {
+        setMensaje('Error al cargar las cartas');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setMensaje('Error de conexión');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const enviarCarta = async (e) => {
+    e.preventDefault();
+    
+    if (!nombre.trim() || !carta.trim()) {
+      setMensaje('Por favor completa todos los campos');
+      return;
+    }
+
+    setEnviando(true);
+    setMensaje('');
+
+    try {
+      const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+        body: JSON.stringify({
+          nombre: nombre,
+          carta: carta
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setMensaje('¡Carta enviada con éxito! 💌');
+        setNombre('');
+        setCarta('');
+        setMostrarFormulario(false);
+        
+        // Recargar cartas
+        setTimeout(() => {
+          cargarCartas();
+        }, 1000);
+      } else {
+        setMensaje('Error al enviar: ' + data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setMensaje('Error al enviar la carta. Intenta de nuevo.');
+    } finally {
+      setEnviando(false);
+    }
+  };
+
+  const formatearFecha = (fechaISO) => {
+    const fecha = new Date(fechaISO);
+    return fecha.toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  return (
+    <div className="contenedor">
+      <h2 className="titulo-seccion">Cartas de Amor</h2>
+      
+      {/* Botón para mostrar formulario */}
+      <div className="cartas-acciones">
+        <button 
+          className="boton-nueva-carta"
+          onClick={() => setMostrarFormulario(!mostrarFormulario)}
+        >
+          {mostrarFormulario ? '❌ Cancelar' : '✍️ Escribir Nueva Carta'}
+        </button>
+      </div>
+
+      {/* Mensajes de feedback */}
+      {mensaje && (
+        <div className={`mensaje-feedback ${mensaje.includes('éxito') ? 'exito' : 'error'}`}>
+          {mensaje}
+        </div>
+      )}
+
+      {/* Formulario para nueva carta */}
+      {mostrarFormulario && (
+        <div className="formulario-carta">
+          <form onSubmit={enviarCarta}>
+            <div className="campo-formulario">
+              <label htmlFor="nombre">Tu Nombre:</label>
+              <input
+                type="text"
+                id="nombre"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+                placeholder="Escribe tu nombre..."
+                maxLength="50"
+                required
+              />
+            </div>
+            
+            <div className="campo-formulario">
+              <label htmlFor="carta">Tu Carta de Amor:</label>
+              <textarea
+                id="carta"
+                value={carta}
+                onChange={(e) => setCarta(e.target.value)}
+                placeholder="Escribe tu carta de amor aquí... Expresa todo lo que sientes ❤️"
+                rows="8"
+                maxLength="2000"
+                required
+              />
+              <small className="contador-caracteres">
+                {carta.length}/2000 caracteres
+              </small>
+            </div>
+
+            <button 
+              type="submit" 
+              className="boton-enviar-carta"
+              disabled={enviando}
+            >
+              {enviando ? '📤 Enviando...' : '💌 Enviar Carta'}
+            </button>
+          </form>
+        </div>
+      )}
+
+      {/* Lista de cartas */}
+      <div className="contenedor-cartas">
+        {loading ? (
+          <div className="cargando-cartas">
+            <div className="spinner">💌</div>
+            <p>Cargando cartas de amor...</p>
+          </div>
+        ) : cartas.length === 0 ? (
+          <div className="sin-cartas">
+            <p>📭 Aún no hay cartas. ¡Sé el primero en escribir una!</p>
+          </div>
+        ) : (
+          <div className="lista-cartas">
+            {cartas.map((carta) => (
+              <div key={carta.id} className="carta">
+                <div className="carta-header">
+                  <h3>💕 De: {carta.nombre}</h3>
+                  <span className="carta-fecha">{formatearFecha(carta.fecha)}</span>
+                </div>
+                <div className="contenido-carta">
+                  <p>{carta.carta}</p>
+                </div>
+                <div className="carta-footer">
+                  <span className="carta-decoracion">~💌~</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Botón para recargar */}
+      {cartas.length > 0 && (
+        <div className="cartas-acciones">
+          <button 
+            className="boton-recargar"
+            onClick={cargarCartas}
+            disabled={loading}
+          >
+            🔄 Recargar Cartas
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
 function App() {
   // Estados para el menú y navegación
   const [menuActivo, setMenuActivo] = useState(false);
@@ -693,29 +898,15 @@ function App() {
                 </p>
                 <p className='firma-carta'>de tu hombre que te ama con el alma</p>
               </div>
-              {/*Gracias por todo*/}
-              <div className='carta'>
-                <BotonFavorito
-                item={{
-                  id:"<3",
-                  tipo:"carta",
-                  titulo:"11.11 <3",
-                  descripcion:"<3"
-                }}
-                />
-                <h3>Carta porque si</h3>
-                <p className='contenido-carta'>Hola, hoy no es para alegrarnos y hoy no es para hablarte
-                  lo mucho que estoy enamorado de ti, quiero simplemente decirte que gracias, perdon por durante 
-                  este tiempo darte una relacion asi de mala, perdon por hacerte aguantar todo eso que aguantaste
-                  todo ese tiempo, perdon perdon perdon por siempre, no soy un buen hombre y solo buscaba mi bienestar
-                  simplemente perdon y se que esto no es una manera de pedir perdon, espero que algun dia entres en la app y leas esto
-                  simplemente te amo, perdoname por no ser un buen hombre para ti, un hombre al que le tengas miedo y
-                  un hombre al que no le cuentes las cosas, perdona por ser ese hombre que te hacia sufrir y solo
-                  se preocupaba por el mismo y no por lo que sentias, perdoname y nada TE AMO.
-                </p>
-                <p className='firma-carta'>Gracias por todo flaca, te amo</p>
-              </div>
+
+          
         </section>
+            {/* Cartas */}
+            <section id="cartas" className="seccion-cartas">
+            <SeccionCartas />
+          </section>
+        
+              
       </main>
       {/* Footer */}
       <footer>
@@ -731,7 +922,7 @@ function App() {
         <button className="boton-arriba" onClick={scrollToTop}>
           ↑
         </button>
-              )}
+      )}
       {/* Botón flotante de favoritos */}
       <button
       onClick={() => setMostrarFavoritos(true)}
