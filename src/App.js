@@ -849,57 +849,6 @@ function App() {
               </div>
                   </div>
                 </div>
-               
-              </section>
-        {/*seccion cartas*/}
-        <section id ="cartas" className='seccion-galeria'>
-                <div className='contenedor'></div>
-                <h1 className='titulo-seccion'>cartas</h1>
-                {/*Carta principal */}
-                <div className='carta'>
-                  <BotonFavorito
-                item={{
-                  id:'carta1',
-                  tipo: 'carta',
-                  titulo:'primera carta de la pagina',
-                  descripcion:'simplemente te amo'
-                }
-              }/>
-                
-                  <h3>19/09/2025</h3>
-                  <p className='contenido-carta'>
-                  hola mi vida, esta es la primera carta de la pagina, que pensabas? que era solo para hoy? no mi vida esta pagina es para siempre mi hermosa,
-                  cada dia voy a ir poniendo una cartica para ti mi hermosa un dia x asi que te pido que descargues esto y cada que te diga que lo actualize que lo vayas viendo 
-                  porque amorcito tenemos muchas historias pr contar mi niña precios, gracias, simplemente gracias por todo mi hermosa gracias por ser mi polo a tierra mi todo mi flaca hermosa de mi alma
-                  simplemente gracias por ser mi polo a tierra, simplemente no se que haria sin ti amorcito, enserio TE AMO TE AMO CON MI ALMA ENTERA, hoy es nuestro aniversario
-                  y simplemente no solo por hoy y tambien es la idea de esta app que no solo hoy enamorarte sino cada dia mas y mas y mas mi hermosa, enserio te amo mi vida y gracias
-                  gracias por serlo todo para mi, se que no soy muy expresivo o muy detallista y esto es lo que he estado programando durante ya muuuucho tiempo y enserio flaca
-                  espero que te haya encantado.
-                  </p>
-                  <p className='firma-carta'>con muhcho amor tu flaco</p>
-                </div>
-              {/*Just because */}
-              <div className='carta'>
-                <BotonFavorito
-                item={{
-                  id:"carta porque si",
-                  tipo:"carta",
-                  titulo:"Just because",
-                  descripcion:"una cartita porque si"
-                }}
-                />
-                <h3>Carta porque si</h3>
-                <p className='contenido-carta'>hola mi hermosa, como estas mi hermosa
-                  espero estes muy bien amada mia hoy siendo 22/09/2025
-                  quiero escribirte una carta porque si asi que amor, hoy te doy las gracias
-                  por ser la mujer a la que amo y a la mujer que hace que mis ojitos brillen
-                  enserio gracias por amarme de la manera en la que me amas
-                  simplemente Te amo
-                </p>
-                <p className='firma-carta'>de tu hombre que te ama con el alma</p>
-              </div>
-
-          
         </section>
             {/* Cartas */}
             <section id="cartas" className="seccion-cartas">
