@@ -837,11 +837,60 @@ function App() {
                     }}
                     />
                 </div>
-                  
-                  
 
-              
-            
+                {/** Video fiesta*/}
+                <div className='elemento-foto'>
+                  <video src={process.env.PUBLIC_URL+'/video/Quedate.mp4'}
+                  controls
+                  className='video-galeria'>
+                  </video>
+                    <BotonFavorito
+                    item={{
+                      id:'video-Quedate',
+                      tipo:'video',
+                      titulo:'Quedate que la noche sin ti duele',
+                      descripcion:'Te amooooooooooooooooooooo mi hermosaaaaaaa!!!!',
+                      src:'/video/Quedate.mp4'
+                    }}
+                    />
+                </div>
+                {/*Fotos halloween */}
+                {[1, 2, 3,4].map((num) => (
+                <div key={num} className="elemento-foto">
+                  <img src={process.env.PUBLIC_URL + `/images/31_${num}.jpg`}
+                    alt={`halloween ${num}`}
+                    className="foto-galeria"
+                  />
+                  <BotonFavorito
+                    item={{
+                      id: `foto-halloween-${num}`,
+                      tipo: 'foto',
+                      titulo: `fotito halloween ${num}`,
+                      descripcion: 'fotito halloween',
+                      src: `/images/31_${num}.jpg`
+                    }}
+                  />
+                </div>
+              ))}
+              {/*Fiestuky*/}
+              {[1, 2, 3,4,5].map((num) => (
+                <div key={num} className="elemento-foto">
+                  <img src={process.env.PUBLIC_URL + `/images/fiestuky_${num}.jpg`}
+                    alt={`fiestuky ${num}`}
+                    className="foto-galeria"
+                  />
+                  <BotonFavorito
+                    item={{
+                      id: `fiestuky_${num}`,
+                      tipo: 'foto',
+                      titulo: `fotito fiesta${num}`,
+                      descripcion: 'fotito pre-halloween',
+                      src: `/images/fiestuky_${num}.jpg`
+                    }}
+                  />
+                </div>
+              ))}
+
                   {/*Proximamente */}
                    <div className="elemento-proximamente">
                 <h2 className='contenido-carta'>proximamente mas fotos y 
@@ -849,6 +898,8 @@ function App() {
               </div>
                   </div>
                 </div>
+               
+
         </section>
             {/* Cartas */}
             <section id="cartas" className="seccion-cartas">
